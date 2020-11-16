@@ -10,20 +10,20 @@ import (
 
 const layout string = "2006-01-02"
 
-func New(from, to string) ([]time.Time, error) {
+func New(start, end string) ([]time.Time, error) {
 	
 	// Convert string to YYYY-MM-DD format time
-	start_time, _ := time.Parse(layout, from)
+	start_time, _ := time.Parse(layout, start)
 	
-	// If 'to' is empty, get today's date
-	if to == "" {
-		to = time.Now().Format(layout)
+	// If 'end' is empty, get today's date
+	if end == "" {
+		end = time.Now().Format(layout)
 	}
-	end_time, _ := time.Parse(layout, to)
+	end_time, _ := time.Parse(layout, end)
 	
 	// Check if the dates are correct
 	if end_time.Sub(start_time) < 0 {
-		return nil, errors.New("Invalid dates passed!")
+		return nil, errors.New(fmt.Sprintf("Invalid dates passed '%s:%s'", start, end))
 	}
 	
 	// Adding days until it hits the "end_date" date
