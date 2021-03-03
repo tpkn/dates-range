@@ -32,18 +32,16 @@ func New(start, end string) ([]time.Time, error) {
 		return nil, errors.New(fmt.Sprintf("Invalid dates passed '%s:%s'", start, end))
 	}
 	
-	// Adding days until it hits the "end_date" date
-	start_date := time.Date(start_time.Year(), start_time.Month(), start_time.Day(), 0,0,0,0, time.Local)
-	end_date := time.Date(end_time.Year(), end_time.Month(), end_time.Day(), 0,0,0,0, time.Local)
-	result := []time.Time { start_date }
+	result := []time.Time { start_time }
 	
-	if start_date == end_date {
+	if start_time == end_time {
 		return result, nil
 	}
 	
-	for start_date != end_date {
-		start_date = start_date.AddDate(0, 0, 1)
-		result = append(result, start_date)
+	// Adding days until it hits the "end_date" date
+	for start_time != end_time {
+		start_time = start_time.AddDate(0, 0, 1)
+		result = append(result, start_time)
 	}
 	
 	return result, nil
