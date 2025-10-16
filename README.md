@@ -1,6 +1,8 @@
 # Dates Range
 Go module to get a list of dates between two dates
 
+The same thing, but in the cli format - [seqd](https://github.com/tpkn/seqd).
+
 
 ## API
 
